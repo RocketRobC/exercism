@@ -1,17 +1,11 @@
 class Hamming
   VERSION = 1
 
-  def self.compute(listA, listB)
-    if listA.length != listB.length
+  def self.compute(strand_1, strand_2)
+    if strand_1.length != strand_2.length
       raise ArgumentError
     end
-    counter = 0
-    listA.length.times do |index|
-      if listA[index] != listB[index]
-        counter += 1
-      end
-    end
-    counter
+    (strand_1.length.times).count { |i| strand_1[i] != strand_2[i] }
   end
 
 end
