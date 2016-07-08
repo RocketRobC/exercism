@@ -1,10 +1,12 @@
 class Year
-  
+
   def self.leap?(year)
-    if year < 1752
+    if (8..1581).include?(year)
       julian_leap?(year)
-    else
+    elsif year >= 1582
       gregorian_leap?(year)
+    else
+      raise ArgumentError, "Year out of range"
     end
   end
 
@@ -13,7 +15,7 @@ class Year
   end
 
   def self.gregorian_leap?(year)
-    year % 4 == 0 && year % 100 == 0 ? year % 400 == 0 : year % 4 == 0
+    (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)
   end
 end
 

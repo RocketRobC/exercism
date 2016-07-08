@@ -49,6 +49,20 @@ class YearTest < Minitest::Test
     assert Year.leap?(2000), "Expected 'true', 2000 is a leap year."
   end
 
+  def test_julian_year
+    # skip
+    refute Year.leap?(1466), "Expected 'false', 1466 is a leap year."
+  end
+
+  def test_leap_y2k
+    # skip
+    assert Year.leap?(1584), "Expected 'true', 1584 is a leap year."
+  end
+
+  def test_year_out_of_range
+    assert_raises(ArgumentError) { Year.leap?(6) }
+  end
+
   # Problems in exercism evolve over time, as we find better ways to ask
   # questions.
   # The version number refers to the version of the problem you solved,
