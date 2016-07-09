@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+GrainsTest	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^class GrainsTest < Minitest::Test$/;"	class	line:6
+test_square_1	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_1$/;"	method	line:7	class:GrainsTest
+test_square_2	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_2$/;"	method	line:11	class:GrainsTest
+test_square_3	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_3$/;"	method	line:16	class:GrainsTest
+test_square_4	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_4$/;"	method	line:21	class:GrainsTest
+test_square_16	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_16$/;"	method	line:26	class:GrainsTest
+test_square_32	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_32$/;"	method	line:31	class:GrainsTest
+test_square_64	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_square_64$/;"	method	line:36	class:GrainsTest
+test_total_grains	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/grains_test.rb	/^  def test_total_grains$/;"	method	line:41	class:GrainsTest
+Grains	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/README.md	/^# Grains$/;"	function	line:1
+For bonus points	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/README.md	/^## For bonus points$/;"	function	line:18
+Source	/Users/robcornish/projects/code-challenges/exercism/ruby/grains/README.md	/^## Source$/;"	function	line:58
