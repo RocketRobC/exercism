@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Word Count	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/README.md	/^# Word Count$/;"	function	line:1
+Source	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/README.md	/^## Source$/;"	function	line:44
+PhraseTest	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^class PhraseTest < Minitest::Test$/;"	class	line:8
+test_count_one_word	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_count_one_word$/;"	method	line:9	class:PhraseTest
+test_count_one_of_each	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_count_one_of_each$/;"	method	line:15	class:PhraseTest
+test_count_multiple_occurrences	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_count_multiple_occurrences$/;"	method	line:22	class:PhraseTest
+test_count_everything_just_once	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_count_everything_just_once$/;"	method	line:29	class:PhraseTest
+test_ignore_punctuation	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_ignore_punctuation$/;"	method	line:40	class:PhraseTest
+test_handles_cramped_lists	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_handles_cramped_lists$/;"	method	line:50	class:PhraseTest
+test_handles_expanded_lists	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_handles_expanded_lists$/;"	method	line:57	class:PhraseTest
+test_include_numbers	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_include_numbers$/;"	method	line:64	class:PhraseTest
+test_normalize_case	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_normalize_case$/;"	method	line:71	class:PhraseTest
+test_with_apostrophes	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_with_apostrophes$/;"	method	line:78	class:PhraseTest
+test_with_quotations	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_with_quotations$/;"	method	line:88	class:PhraseTest
+test_bookkeeping	/Users/robcornish/projects/code-challenges/exercism/ruby/word-count/word_count_test.rb	/^  def test_bookkeeping$/;"	method	line:106	class:PhraseTest
