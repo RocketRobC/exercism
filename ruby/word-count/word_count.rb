@@ -13,10 +13,10 @@ class Phrase
   end
 
   def parse_phrase(phrase)
-    phrase.split(/\W[^a-zA-Z]/)
+    phrase.downcase.scan(/\w+'\w+|\w+/)
   end
 end
 
-  class BookKeeping
-    VERSION = 1
-  end
+class BookKeeping
+  VERSION = 1
+end
