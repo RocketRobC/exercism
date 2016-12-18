@@ -8,7 +8,7 @@ class Bob
       'Sure.'
     when remark =~ /\A\s*\z/
       "Fine. Be that way!"
-    when !remark.match(/^[^A-z]*$/) || remark
+    else
       'Whatever.'
     end
   end
