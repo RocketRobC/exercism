@@ -1,14 +1,39 @@
+module BookKeeping
+  VERSION = 2
+end
+
 class RunLengthEncoding
 
   def self.encode(input)
-    input_chars = input.chars.to_a
-    char_count = input_chars.each_with_object(Hash.new(0)) do |c, hash|
-      hash[c] += 1
+    previous = input.chars.first
+    count = 0
+    input.chars.inject("") do |result, c|
+      if previous == c
+        count += 1
+      else
+        result << "#{show_count(count)}#{previous}"
+        count = 1
+        previous = c
+      end
+      @ans = result
     end
-    char_count.map { |k, v| "#{v}#{k}" }.join  
+    @ans << "#{show_count(count)}#{previous}"
   end
 
-  def decode(input)
+  def self.decode(input)
+    #result = ""
+    input.scan(/(\d+)?(.)/).inject("") do |result, (d, c)|
+      if d == nil
+        result << c
+      else
+        result << c * d.to_i
+      end
+      result
+    end
+  end
+
+  def self.show_count(count)
+    count unless count == 1
   end
 
 end
