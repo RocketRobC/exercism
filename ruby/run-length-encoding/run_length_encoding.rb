@@ -5,35 +5,17 @@ end
 class RunLengthEncoding
 
   def self.encode(input)
-    previous = input.chars.first
-    count = 0
-    input.chars.inject("") do |result, c|
-      if previous == c
-        count += 1
-      else
-        result << "#{show_count(count)}#{previous}"
-        count = 1
-        previous = c
-      end
-      @ans = result
+    input.chars.chunk { |chars| chars }.inject("") do |result, (name, chars)|
+      value = chars.size == 1 ? chars[0] : chars.size.to_s + name
+      result << value
     end
-    @ans << "#{show_count(count)}#{previous}"
   end
 
   def self.decode(input)
-    #result = ""
-    input.scan(/(\d+)?(.)/).inject("") do |result, (d, c)|
-      if d == nil
-        result << c
-      else
-        result << c * d.to_i
-      end
-      result
+    input.scan(/(\d+)?(.)/).inject("") do |result, (count, char)|
+      value = count ? char * count.to_i : char
+      result << value
     end
-  end
-
-  def self.show_count(count)
-    count unless count == 1
   end
 
 end
