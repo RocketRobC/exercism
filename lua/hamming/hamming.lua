@@ -1,6 +1,6 @@
-module 'hamming'
+local hamming = {}
 
-function compute(str1, str2)
+function hamming.compute(str1, str2)
   local diff_count = 0
   if #str1 ~= #str2 then return -1 end
   for i = 1, #str1 do
@@ -10,3 +10,5 @@ function compute(str1, str2)
   end
   return diff_count
 end
+
+return hamming
