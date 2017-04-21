@@ -1,6 +1,4 @@
-local raindrops = {}
-
-local function raindrops(num)
+return function(num)
   local result = ''
   if num % 3 == 0 then result = result .. 'Pling' end
   if num % 5 == 0 then result = result .. 'Plang' end
@@ -11,5 +9,3 @@ local function raindrops(num)
     return result
   end
 end
-
-return raindrops

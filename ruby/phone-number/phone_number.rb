@@ -6,7 +6,7 @@ class PhoneNumber
   def number
     return invalid if @phone =~ /[a-zA-Z]+/
     if @phone.start_with?('1') && @phone.size == 11
-      @phone.byteslice(1, @phone.size)
+      @phone[1..@phone.size]
     elsif @phone.size != 10
       invalid
     else
@@ -15,7 +15,7 @@ class PhoneNumber
   end
 
   def area_code
-    number.byteslice(0, 3)
+    number[0..2]
   end
 
   def to_s
