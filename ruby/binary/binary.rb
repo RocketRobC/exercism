@@ -1,20 +1,16 @@
 class Binary
-
-  def self.to_decimal(n)
-    n.reverse.chars.each_with_index.map do |n, i|
-      raise ArgumentError unless valid?(n)
+  def self.to_decimal(input)
+    raise ArgumentError unless valid?(input)
+    input.reverse.chars.each_with_index.map do |n, i|
       n.to_i << i
     end.inject(:+)
   end
 
-  def self.valid?(n)
-    return true if ["0", "1"].include?(n)
-    false
+  def self.valid?(input)
+    input.chars.all? { |c| %w(0 1).include?(c) }
   end
-
 end
 
 module BookKeeping
   VERSION = 3
 end
-
