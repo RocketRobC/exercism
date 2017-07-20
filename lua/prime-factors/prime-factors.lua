@@ -1,4 +1,4 @@
-function prime_factors(n, result)
+local function prime_factors(n, result)
   local result = result or {}
   if n == 1 then return result end
   for i = 2, n do
