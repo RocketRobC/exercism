@@ -1,5 +1,4 @@
 class Year
-
   def self.leap?(year)
     if (8..1581).include?(year)
       julian_leap?(year)
