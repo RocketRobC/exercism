@@ -1,9 +1,6 @@
 import re
+from collections import Counter
 
 def word_count(s):
-    result = {}
-    words = re.split('[^a-zA-Z0-9]', s.lower())
-    for word in words:
-        result[word] = words.count(word)
-    if '' in result: del result['']
-    return result
+    words = re.findall('[a-zA-Z0-9]+', s.lower())
+    return Counter(words)
