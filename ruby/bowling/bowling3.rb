@@ -2,17 +2,27 @@ class Frame
   attr_reader :roll1
 
   def initialize
-    @roll1, @roll2 = nil, nil
+    @roll1, @roll2, @last_roll = nil, nil, nil
     @bonus = nil
   end
 
   def add_roll(pins)
-    @roll1.nil? ? @roll1 = pins : @roll2 = pins
+    if @roll1.nil?
+      @roll1 = pins
+    elsif @roll2.nil?
+      @roll2 = pins
+    else
+      @last_roll = pins
+    end
   end
 
   def add_bonus(roll)
     @bonus = roll
     self
+  end
+
+  def last_frame_complete?
+    ((@roll1 || 0) + (@roll2 || 0) < 10 && !@roll2.nil?) || !@last_roll.nil?
   end
 
   def complete?
@@ -28,7 +38,7 @@ class Frame
   end
 
   def score
-    @roll1 + (@roll2 || 0) + (@bonus || 0)
+    @roll1 + (@roll2 || 0) + (@bonus || 0) + (@last_roll || 0)
   end
 end
 
@@ -40,7 +50,7 @@ class ScoreCard
 
   def add(frame:, last_frame:)
     if last_frame == true
-      last_frame(frame)
+      @frame_scores << frame.score
     elsif frame.strike? || frame.spare?
       @stack << frame
     elsif @stack.empty?
@@ -63,14 +73,8 @@ class ScoreCard
     end
   end
 
-  def last_frame(frame)
-    puts @stack.inspect
-    previous_frame = @stack.pop
-    @frame_scores << previous_frame.score + frame.roll1
-  end
-
   def last_frame?
-    @frame_scores.size == 10 || (@frame_scores.size == 9 && !@stack.empty?)
+    @frame_scores.size == 9
   end
 
   def total_score
@@ -86,9 +90,9 @@ class Game
 
   def roll(pins)
     @current_frame.add_roll(pins)
-    if @score_card.last_frame?
+    if @score_card.last_frame? && @current_frame.last_frame_complete?
       @score_card.add(frame: @current_frame, last_frame: true)
-    elsif @current_frame.complete?
+    elsif !@score_card.last_frame? && @current_frame.complete?
       @score_card.add(frame: @current_frame, last_frame: false)
       @current_frame = Frame.new
     end
