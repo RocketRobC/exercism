@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'bowling'
+require_relative 'bowling3'
 
 # Common test data version: 1.0.0 3cf5eb9
 class BowlingTest < Minitest::Test
@@ -12,56 +12,62 @@ class BowlingTest < Minitest::Test
   end
 
   def test_should_be_able_to_score_a_game_with_all_zeros
-    # skip
+    #skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 0, @game.score
   end
 
   def test_should_be_able_to_score_a_game_with_no_strikes_or_spares
+    #skip
     record([3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6])
     assert_equal 90, @game.score
   end
 
   def test_a_spare_followed_by_zeros_is_worth_ten_points
+    #skip
     record([6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 10, @game.score
   end
 
   def test_points_scored_in_the_roll_after_a_spare_are_counted_twice
+    #skip
     record([6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 16, @game.score
   end
 
   def test_consecutive_spares_each_get_a_one_roll_bonus
+    #skip
     record([5, 5, 3, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 31, @game.score
   end
 
   def test_a_spare_in_the_last_frame_gets_a_one_roll_bonus_that_is_counted_once
+    #skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 7])
     assert_equal 17, @game.score
   end
 
   def test_a_strike_earns_ten_points_in_a_frame_with_a_single_roll
-    skip
+    #skip
     record([10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 10, @game.score
   end
 
   def test_points_scored_in_the_two_rolls_after_a_strike_are_counted_twice_as_a_bonus
-    skip
+    #skip
     record([10, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 26, @game.score
   end
 
   def test_consecutive_strikes_each_get_the_two_roll_bonus
-    skip
+    #skip
     record([10, 10, 10, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     assert_equal 81, @game.score
   end
 
   def test_a_strike_in_the_last_frame_gets_a_two_roll_bonus_that_is_counted_once
-    skip
+    #skip
+    puts "***"
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 1])
     assert_equal 18, @game.score
   end
