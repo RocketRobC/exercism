@@ -40,6 +40,10 @@ class Frame
   def score
     @roll1 + (@roll2 || 0) + (@bonus || 0) + (@last_roll || 0)
   end
+
+  def valid?
+    @roll1 + (@roll2 || 0) <= 10
+  end
 end
 
 class ScoreCard
@@ -49,8 +53,9 @@ class ScoreCard
   end
 
   def add(frame:, last_frame:)
-    if last_frame == true
+    if last_frame == true || @stack.size == 10
       @frame_scores << frame.score
+      calculate_frame(frame)
     elsif frame.strike? || frame.spare?
       @stack << frame
     elsif @stack.empty?
@@ -83,16 +88,19 @@ class ScoreCard
 end
 
 class Game
+  class BowlingError < StandardError; end
   def initialize(frame: Frame.new, score_card: ScoreCard.new)
     @current_frame = frame
     @score_card = score_card
   end
 
   def roll(pins)
+    valid_roll?(pins)
     @current_frame.add_roll(pins)
     if @score_card.last_frame? && @current_frame.last_frame_complete?
       @score_card.add(frame: @current_frame, last_frame: true)
     elsif !@score_card.last_frame? && @current_frame.complete?
+      valid_frame?
       @score_card.add(frame: @current_frame, last_frame: false)
       @current_frame = Frame.new
     end
@@ -100,5 +108,13 @@ class Game
 
   def score
     @score_card.total_score
+  end
+
+  def valid_roll?(pins)
+    raise BowlingError unless (0..10).cover?(pins)
+  end
+
+  def valid_frame?
+    raise BowlingError unless @current_frame.valid?
   end
 end

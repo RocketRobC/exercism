@@ -96,7 +96,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_rolls_can_not_score_negative_points
-    skip
+    #skip
     record([])
     assert_raises Game::BowlingError do
       @game.roll(-1)
@@ -104,7 +104,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_a_roll_can_not_score_more_than_10_points
-    skip
+    #skip
     record([])
     assert_raises Game::BowlingError do
       @game.roll(11)
@@ -112,7 +112,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_two_rolls_in_a_frame_can_not_score_more_than_10_points
-    skip
+    #skip
     record([5])
     assert_raises Game::BowlingError do
       @game.roll(6)
@@ -120,7 +120,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_bonus_roll_after_a_strike_in_the_last_frame_can_not_score_more_than_10_points
-    skip
+    #skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10])
     assert_raises Game::BowlingError do
       @game.roll(11)
@@ -128,7 +128,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_two_bonus_rolls_after_a_strike_in_the_last_frame_can_not_score_more_than_10_points
-    skip
+    #skip
     record([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5])
     assert_raises Game::BowlingError do
       @game.roll(6)
