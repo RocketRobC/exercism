@@ -22,15 +22,15 @@ class Frame
   end
 
   def last_frame_complete?
-    ((@roll1 || 0) + (@roll2 || 0) < 10 && !@roll2.nil?) || !@last_roll.nil?
+    ((roll1 || 0) + (@roll2 || 0) < 10 && !@roll2.nil?) || !@last_roll.nil?
   end
 
   def complete?
-    @roll1 == 10 || !@roll2.nil?
+    roll1 == 10 || !@roll2.nil?
   end
 
   def strike?
-    @roll1 == 10 && @roll2.nil?
+    roll1 == 10 && @roll2.nil?
   end
 
   def spare?
@@ -38,11 +38,16 @@ class Frame
   end
 
   def score
-    @roll1 + (@roll2 || 0) + (@bonus || 0) + (@last_roll || 0)
+    roll1 + (@roll2 || 0) + (@bonus || 0) + (@last_roll || 0)
   end
 
-  def valid?
-    @roll1 + (@roll2 || 0) <= 10
+  def valid?(last_frame:)
+    return true if last_frame && [roll1, @roll2].all? { |r| r == 10 }
+    if last_frame && roll1 == 10
+      @roll2 + @last_roll <= 10
+    else
+      roll1 + (@roll2 || 0) <= 10
+    end
   end
 end
 
@@ -53,6 +58,7 @@ class ScoreCard
   end
 
   def add(frame:, last_frame:)
+    raise Game::BowlingError if @frame_scores.size == 10
     if last_frame == true || @stack.size == 10
       @frame_scores << frame.score
       calculate_frame(frame)
@@ -83,6 +89,7 @@ class ScoreCard
   end
 
   def total_score
+    raise Game::BowlingError if @frame_scores.size < 10
     @frame_scores.reduce(:+)
   end
 end
@@ -98,9 +105,10 @@ class Game
     valid_roll?(pins)
     @current_frame.add_roll(pins)
     if @score_card.last_frame? && @current_frame.last_frame_complete?
+      valid_frame?(last_frame: true)
       @score_card.add(frame: @current_frame, last_frame: true)
     elsif !@score_card.last_frame? && @current_frame.complete?
-      valid_frame?
+      valid_frame?(last_frame: false)
       @score_card.add(frame: @current_frame, last_frame: false)
       @current_frame = Frame.new
     end
@@ -114,7 +122,11 @@ class Game
     raise BowlingError unless (0..10).cover?(pins)
   end
 
-  def valid_frame?
-    raise BowlingError unless @current_frame.valid?
+  def valid_frame?(last_frame)
+    raise BowlingError unless @current_frame.valid?(last_frame)
   end
+end
+
+module BookKeeping
+  VERSION = 3
 end
