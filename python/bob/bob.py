@@ -1,5 +1,5 @@
 def hey(remark):
-    if remark == remark.upper() and remark != remark.lower():
+    if remark.isupper():
         return 'Whoa, chill out!'
     elif remark.rstrip().endswith('?'):
         return 'Sure.'
