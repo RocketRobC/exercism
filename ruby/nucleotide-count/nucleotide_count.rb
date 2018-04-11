@@ -5,7 +5,7 @@ class Nucleotide
 
   def initialize(dna)
     @dna = dna
-    raise ArgumentError unless valid?
+    raise ArgumentError if dna =~ /[^#{adenosine_library.keys}]/
   end
 
   def count(letter)
@@ -21,13 +21,6 @@ class Nucleotide
   private
 
   attr_reader :dna
-
-  def valid?
-    dna.chars.each do |c|
-      return false unless adenosine_library.keys.include?(c)
-    end
-    true
-  end
 
   def adenosine_library
     { 'A' => 0, 'T' => 0, 'C' => 0, 'G' => 0 }
