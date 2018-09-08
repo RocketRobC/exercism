@@ -10,10 +10,16 @@ class RailFenceCipher
   end
 
   def encode
+    puts sequence.inspect
+    puts code_map(sequence).inspect
     cypher(string, code_map(sequence))
   end
 
   def decode
+    puts string
+    puts sequence.inspect
+    puts code_map(sequence).inspect
+    puts code_map(sequence).invert.inspect
     cypher(string, code_map(sequence).invert)
   end
 

@@ -15,6 +15,7 @@ class RailFenceCipher
 
   def decode
     full_fence = fence(rails_pattern.sort)
+    puts full_fence.inspect
     rails_pattern.map { |i| full_fence[i].shift }.join
   end
 
@@ -29,10 +30,14 @@ class RailFenceCipher
 
   def fence(pattern)
     empty_fence = Hash.new { |h, k| h[k] = [] }
+    puts pattern.inspect
     rail_indexed_chars = string.chars.zip(pattern)
-    rail_indexed_chars.each_with_object(empty_fence) do |(char, rail), col|
+    puts rail_indexed_chars.inspect
+    h = rail_indexed_chars.each_with_object(empty_fence) do |(char, rail), col|
       col[rail] << char
-    end.values
+    end
+    puts h.inspect
+    h.values
   end
 
   def rails_pattern
