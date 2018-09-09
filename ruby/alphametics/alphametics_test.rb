@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'alphametics'
+require_relative 'alphametics_2'
 
 # Common test data version: 1.0.0 b9bada8
 class AlphameticsTest < Minitest::Test
@@ -12,28 +12,28 @@ class AlphameticsTest < Minitest::Test
   end
 
   def test_solution_must_have_unique_value_for_each_letter
-    skip
+    # skip
     input = 'A == B'
     expected = {}
     assert_equal expected, Alphametics.solve(input)
   end
 
   def test_leading_zero_solution_is_invalid
-    skip
+    # skip
     input = 'ACA + DD == BD'
     expected = {}
     assert_equal expected, Alphametics.solve(input)
   end
 
   def test_puzzle_with_four_letters
-    skip
+    # skip
     input = 'AS + A == MOM'
     expected = { 'A' => 9, 'M' => 1, 'O' => 0, 'S' => 2 }
     assert_equal expected, Alphametics.solve(input)
   end
 
   def test_puzzle_with_six_letters
-    skip
+    # skip
     input = 'NO + NO + TOO == LATE'
     expected = { 'A' => 0, 'E' => 2, 'L' => 1, 'N' => 7,
                  'O' => 4, 'T' => 9 }
