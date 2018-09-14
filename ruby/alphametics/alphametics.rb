@@ -1,3 +1,5 @@
+require 'io/console'
+
 class Alphametics
   def self.solve(input)
     new(input).solve
@@ -6,72 +8,55 @@ class Alphametics
   def initialize(input)
     @input = input
     @summands, @sum = split_operation
-    @letter_list = @summands.tr('+', '').chars.uniq
-    # @value_map = current_values
-    @number_selector = SelectedNumber.new(@letter_list)
+    @letter_list = (@summands + @sum).tr('+', '').chars.uniq
   end
 
-  # need to map the @sum to numbers.
   def solve
-    sum_str = @summands
-    @letter_list.each do |l|
-      sum_str = sum_str.tr(l, @number_selector.choose_for(l).to_s)
+    return {} if @letter_list.size < 3
+    value_gen(@letter_list.size).each do |test_values|
+      summand_str = @summands
+      sum = @sum
+      test_values.each do |l, n|
+        replacement = test_values[l]
+        summand_str = summand_str.tr(l, replacement.to_s)
+        sum = sum.tr(l, replacement.to_s)
+      end
+      current_sum = summand_str.split('+').map(&:to_i).reduce(:+)
+      # TODO: Fix validation for test 4
+      if current_sum == sum.to_i && valid_sum?(summand_str)
+        test_values
+      else
+        {}
+      end
     end
-    puts sum_str.split('+').map(&:to_i)
-    current_sum = sum_str.split('+').map(&:to_i).reduce(:+)
-    return current_sum if current_sum == @sum.to_i
   end
 
   private
-
-  def map_to_number(str)
-  end
 
   def split_operation
     @input.split('==').map { |c| c.tr(' ', '') }
   end
 
-  def current_values
-    @letter_list.each_with_object({}) do |l|
-      hash[l] = SelectedNumber.new(@letter_list)
+  def value_gen(len)
+    return enum_for(:value_gen, len) unless block_given?
+    arr = (0...len).to_a
+    while arr.size == len
+      yield current_values_hash(arr) if arr.uniq == arr
+      arr = (arr.join('').to_i + 1).to_s.chars.map { |c| c.to_i }
+      arr.size < len ? arr.unshift(0 * (len - arr.size)) : arr
     end
   end
 
-  class SelectedNumber
-    def initialize(letters)
-      @letter_values = letters.each_with_object({}) { |l, hash| hash[l] = (0..9).to_a }
-    end
-      
-    def choose_for(letter)
-      return if @letter_values[letter].empty?
-      chosen = @letter_values[letter].sample
-      @letter_values[letter].delete(chosen)
-      chosen
-    end
+  def current_values_hash(number_list)
+    @letter_list.zip(number_list).to_h
+  end
+
+  def valid_sum?(summand_str)
+    return false if summand_str.split('+').any? { |a| a[0].to_i.zero? }
+    true
   end
 end
 
 module BookKeeping
   VERSION = 4
 end
-
-o = Alphametics::SelectedNumber.new(%w[N O T])
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "N: #{o.choose_for('N')}"
-puts "O: #{o.choose_for('O')}"
-puts "O: #{o.choose_for('O')}"
-puts "O: #{o.choose_for('O')}"
-puts "O: #{o.choose_for('O')}"
-puts "T: #{o.choose_for('T')}"
-puts "T: #{o.choose_for('T')}"
-puts "T: #{o.choose_for('T')}"
-puts "T: #{o.choose_for('T')}"
-puts "T: #{o.choose_for('T')}"
-puts "T: #{o.choose_for('T')}"

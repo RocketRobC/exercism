@@ -12,14 +12,14 @@ class AlphameticsTest < Minitest::Test
   end
 
   def test_solution_must_have_unique_value_for_each_letter
-    skip
+    # skip
     input = 'A == B'
     expected = {}
     assert_equal expected, Alphametics.solve(input)
   end
 
   def test_leading_zero_solution_is_invalid
-    skip
+    # skip
     input = 'ACA + DD == BD'
     expected = {}
     assert_equal expected, Alphametics.solve(input)
