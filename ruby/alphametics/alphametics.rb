@@ -1,5 +1,3 @@
-require 'io/console'
-
 class Alphametics
   def self.solve(input)
     new(input).solve
@@ -23,7 +21,7 @@ class Alphametics
         input = input.tr(l, test_values[l].to_s)
       end
       summands_list, sum = split_operation(input)
-      current_sum = summands_list.map(&:to_i).reduce(:+)
+      current_sum = summands_list.map(&:to_i).sum
       return test_values if current_sum == sum.to_i && valid?(summands_list << sum)
     end
   end
@@ -35,11 +33,10 @@ class Alphametics
 
   def value_gen(len)
     return enum_for(:value_gen, len) unless block_given?
-    arr = (0...len).to_a
+    arr = [1] + (0...(len - 1)).to_a
     while arr.size == len
       yield current_values_hash(arr) if arr.uniq == arr
       arr = (arr.join.to_i + 1).to_s.chars.map(&:to_i)
-      arr.size < len ? arr.unshift(0 * (len - arr.size)) : arr
     end
   end
 
@@ -49,25 +46,6 @@ class Alphametics
 
   def valid?(str)
     return false if str.any? { |a| a[0].to_i.zero? }
-    true
-  end
-
-  def value_gen(len)
-    return enum_for(:value_gen, len) unless block_given?
-    arr = (0...len).to_a
-    while arr.size == len
-      yield current_values_hash(arr) if arr.uniq == arr
-      arr = (arr.join('').to_i + 1).to_s.chars.map { |c| c.to_i }
-      arr.size < len ? arr.unshift(0 * (len - arr.size)) : arr
-    end
-  end
-
-  def current_values_hash(number_list)
-    @letter_list.zip(number_list).to_h
-  end
-
-  def valid_sum?(summand_str)
-    return false if summand_str.split('+').any? { |a| a[0].to_i.zero? }
     true
   end
 end

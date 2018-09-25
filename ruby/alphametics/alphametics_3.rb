@@ -1,23 +1,3 @@
-class Maybe
-  def self.none
-    new
-  end
-
-  def self.some(val)
-    new(val)
-  end
-
-  attr_reader :val
-
-  def initialize(val = nil)
-    @val = val
-  end
-
-  def some?
-    !@val.nil?
-  end
-end
-
 class Alphametics
   def self.solve(input)
     new(input).solve
@@ -31,11 +11,7 @@ class Alphametics
 
   def solve
     result = solve_for(@letters)
-    if result.some?
-      result.val
-    else
-      {}
-    end
+    result ? result : {}
   end
 
   private
@@ -49,20 +25,16 @@ class Alphametics
       (0..9).each do |n|
         unless solution.values.include?(n)
           result = solve_for(tail, solution.merge({ head => n }))
-          if result.some?
-            return result
-          end
+          return result if result
         end
       end
-      Maybe.none
+      nil
     end
   end
 
   def result_for(solution)
     if calculated_sum(@summands, solution) == convert_to_number(@sum, solution)
-      Maybe.some(solution)
-    else
-      Maybe.none
+      solution
     end
   end
 

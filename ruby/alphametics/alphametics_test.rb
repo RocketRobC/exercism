@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'alphametics_2'
+require_relative 'alphametics_3'
 
 # Common test data version: 1.0.0 b9bada8
 class AlphameticsTest < Minitest::Test
@@ -33,7 +33,7 @@ class AlphameticsTest < Minitest::Test
   end
 
   def test_puzzle_with_six_letters
-    # skip
+    skip
     input = 'NO + NO + TOO == LATE'
     expected = { 'A' => 0, 'E' => 2, 'L' => 1, 'N' => 7,
                  'O' => 4, 'T' => 9 }
@@ -89,7 +89,7 @@ class AlphameticsTest < Minitest::Test
   # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
 
   def test_bookkeeping
-    skip
+    # skip
     assert_equal 4, BookKeeping::VERSION
   end
 end
